@@ -1,0 +1,75 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="app.js"></script>
+	</head>
+
+	<body ng-app="app1">
+		<div id="home_page" ng-controller="ctrl_home">
+			<button ng-click="toAccounts()" type="button">View Customer Profiles</button>
+			<button ng-click="toGenerate()" type="button">Manage Invoices</button>
+			<button ng-click="toHoliday()" type="button">Manage Holidays</button>
+		</div>
+	
+		<div id="accounts_page" ng-controller="ctrl_accounts" style="display: none;" ng-init="days=['monday','tuesday','wednesday', 'thursday', 'friday']">
+			<button ng-click="home()" type="button">Back</button>
+			<span>Select Customer:</span>
+			<select ng-model="company_select" ng-options="company for company in companies" ng-change="showData()">
+			</select>
+			<div id="company_data" style="display: none;">
+				<p>Name: {{name}}</p>
+				<p>Customer no.: {{customer_no}}</p>
+				<p>Address: {{address}}</p>
+				<p>Orders:</p>
+				<table>
+				<thead>
+					<tr>
+						<th>Day</th>
+						<th>Items</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="day in days">
+					<td>{{day}}</td>
+					<td>{{orders[day].descriptions}}</td>
+					<td>{{((orders[day].value == null) ? "-" : "€" + orders[day].value)}}</td>
+				</tr>
+				<t/body>
+				</table>
+			</div>
+		</div>
+		
+		<div id="generate_page" ng-controller="ctrl_generate" style="display: none;">
+			<button ng-click="home()" type="button">Back</button>
+			<form>
+				Month:<br>
+				<input ng-model="month" type="text" placeholder="01">
+				<br>
+				Year:<br>
+				<input ng-model="year" type="text" placeholder="2018">
+				<br><br>
+				<input ng-click="generateInvoices()" type="submit" value="Generate Invoices">
+				<br>
+				<input ng-click="updateDatabase()" type="submit" value="Save Invoice Changes">
+			</form> 
+		</div>
+		
+		<div id="holiday_page" ng-controller="ctrl_holiday" style="display: none;">
+			<button ng-click="home()" type="button">Back</button>
+			<form>
+				Date:<br>
+				<input ng-model="holiday" type="text" placeholder="01-Jan-18">
+				<br><br>
+				<input ng-click="addHoliday()" type="submit" value="Add Holiday">
+				<input ng-click="removeHoliday()" type="submit" value="Remove Holiday">
+			</form> 
+			 <ul> Holidays:
+				<li ng-repeat="cur_holiday in holidays">{{cur_holiday}}</li>
+			</ul> 
+		</div>
+		
+	</body>
+
+</html>
