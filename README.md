@@ -10,4 +10,4 @@ Functionality includes:
 * Ability to log changes and generate new invoices by calling python scripts
 * Ability to input or remove holiday dates into database
 
- [Python scripts incorporated in use case found here](https://github.com/Thomas-Power/Procedural-Invoice-Generator).
+ [Python scripts incorporated found here](https://github.com/Thomas-Power/Procedural-Invoice-Generator).
